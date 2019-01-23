@@ -1,13 +1,10 @@
-pool:
-  vmImage: 'vs2017-win2016'
+pool: AgentDemo
 
 strategy:
   maxParallel: 10
   matrix:
     node-10:
       node_version: ^10.10.0
-    node-8:
-      node_version: ^8.12.0
 
 steps:
 - task: NodeTool@0
@@ -27,11 +24,11 @@ steps:
     yarn test
   displayName: 'Run tests'
 
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  inputs:
-    testResultsFiles: '**junit*.xml'
-    testRunTitle: TestRun ${{ parameters.name }} $(node_version)
+#- task: PublishTestResults@2
+#  displayName: 'Publish Test Results'
+#  inputs:
+#    testResultsFiles: '**junit*.xml'
+#    testRunTitle: TestRun ${{ parameters.name }} $(node_version)
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage results'
